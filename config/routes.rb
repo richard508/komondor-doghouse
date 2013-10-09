@@ -1,4 +1,10 @@
 Ihub::Application.routes.draw do
+  root 'dashboard#show'
+  resource :dashboard, only: [:show]
+  resources :sessions, only: [:new, :create, :destroy]
+
+  get '/signin' => 'sessions#new'
+  delete '/signout' => 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -39,7 +45,7 @@ Ihub::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
