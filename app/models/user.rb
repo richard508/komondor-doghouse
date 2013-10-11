@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
   has_secure_password
+  belongs_to :account
   before_save { self.email = email.downcase }
   before_create :create_remember_token
 
   validates :email, presence: true, uniqueness: { case_sensitive: false }
-
+  validates :name, presence: true
   def self.new_remember_token
     SecureRandom.urlsafe_base64
   end

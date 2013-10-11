@@ -1,0 +1,26 @@
+<%= link_to 'Add User', new_admin_user_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Account</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.admin? ? "Admin" : "User" %></td>
+      <td><%= user.account ? user.account.name : 'n/a' %></td>
+      <td>
+        <%= link_to 'Edit', edit_admin_user_path(user) %>
+        <%= link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

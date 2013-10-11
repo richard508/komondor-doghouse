@@ -2,7 +2,10 @@ Ihub::Application.routes.draw do
   root 'dashboard#show'
   resource :dashboard, only: [:show]
   resources :sessions, only: [:new, :create, :destroy]
-
+  namespace :admin do
+    resources :users, except: [:show]
+    resources :accounts, except: [:show]
+  end
   get '/signin' => 'sessions#new'
   delete '/signout' => 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.

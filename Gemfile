@@ -47,3 +47,6 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 group :development, :test do
   gem 'dotenv-rails'
 end
+
+gem "simple_form", "~> 3.0.0"
+gem "dynamic_form", "~> 1.1.4"
