@@ -1,0 +1,11 @@
+<h1><%= @app.name %></h1>
+
+<dl>
+  <dt>URL</dt>
+  <dd><%= @app.url %></dd>
+  <dt>Secret Key</dt>
+  <dd>
+    <%= @app.secret_key %>
+    <%= link_to "Regenerate Secret Key", regenerate_key_admin_app_path(@app), method: :patch %>
+  </dd>
+</dl>

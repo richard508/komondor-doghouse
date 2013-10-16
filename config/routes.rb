@@ -4,6 +4,9 @@ Ihub::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   namespace :admin do
     resources :users, except: [:show]
+    resources :apps do
+      patch 'regenerate_key', on: :member
+    end
     resources :accounts, except: [:show]
   end
   get '/signin' => 'sessions#new'

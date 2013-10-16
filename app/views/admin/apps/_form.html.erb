@@ -1,0 +1,7 @@
+<%= simple_form_for [:admin, @app] do |f| %>
+  <%= f.error_messages %>
+  <%= f.input :name %>
+  <%= f.input :url %>
+  <%= f.association :accounts, as: :check_boxes %>
+  <%= f.button :submit %>
+<% end %>

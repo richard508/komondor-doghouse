@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011025936) do
+ActiveRecord::Schema.define(version: 20131015235507) do
+
+  create_table "account_apps", force: true do |t|
+    t.integer  "app_id"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "account_apps", ["account_id"], name: "index_account_apps_on_account_id"
+  add_index "account_apps", ["app_id"], name: "index_account_apps_on_app_id"
 
   create_table "accounts", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "apps", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "secret_key"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
