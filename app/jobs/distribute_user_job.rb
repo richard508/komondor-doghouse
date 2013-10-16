@@ -9,8 +9,8 @@ class DistributeUserJob
   def perform
     user = User.find(user_id)
     app = App.find(app_id)
-    Rails.logger.debug "http://#{app.url}/users/new_from_provider?sig=#{SingleSignOn.new(user, app, message(user)).signed_message}"
-    response = HTTParty.get "http://#{app.url}/users/new_from_provider?sig=#{SingleSignOn.new(user, app, message(user)).signed_message}"
+    response = HTTParty.get "http://#{app.url}/users/new?sig=#{SingleSignOn.new(user, app, message(user)).signed_message}"
+    # TODO deal with error case
     raise NewUserNotCreated if response.code != 201
   end
 

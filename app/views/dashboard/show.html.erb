@@ -1,0 +1,7 @@
+<ul>
+<% current_user.apps.each do |app| %>
+<li>
+  <%= link_to app.name, app_path(app) %>
+</li>
+<% end %>
+</ul>

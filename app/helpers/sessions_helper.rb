@@ -39,12 +39,16 @@ module SessionsHelper
   def redirect_back_or(default)
     if session[:referring_app_id].present?
       app = App.find(session[:referring_app_id])
-      redirect_to "http://#{app.url}/sessions/sso?sig=#{SingleSignOn.new(current_user, app).signed_message}"
+      redirect_to app_url(current_user, app)
       session.delete(:referring_app_id)
     else
       redirect_to(session[:return_to] || default)
       session.delete(:return_to)
     end
+  end
+
+  def app_url(user, app)
+    "http://#{app.url}/sessions/new?sig=#{SingleSignOn.new(user, app).signed_message}"
   end
 
   def store_location

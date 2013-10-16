@@ -2,6 +2,7 @@ Ihub::Application.routes.draw do
   root 'dashboard#show'
   resource :dashboard, only: [:show]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :apps, only: [:show]
   namespace :admin do
     resources :users, except: [:show]
     resources :apps do
