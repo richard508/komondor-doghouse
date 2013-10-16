@@ -37,9 +37,10 @@ module SessionsHelper
   end
 
   def redirect_back_or(default)
-    if session[:referring_app].present?
-      redirect_to "http://#{session[:referring_app]}/sessions/sso?sig=#{SingleSignOn.new(current_user).signed_message}"
-      session.delete(:referring_app)
+    if session[:referring_app_id].present?
+      app = App.find(session[:referring_app_id])
+      redirect_to "http://#{app.url}/sessions/sso?sig=#{SingleSignOn.new(current_user, app).signed_message}"
+      session.delete(:referring_app_id)
     else
       redirect_to(session[:return_to] || default)
       session.delete(:return_to)
@@ -50,7 +51,7 @@ module SessionsHelper
     session[:return_to] = request.url if request.get?
   end
 
-  def referring_app(app_url)
-    session[:referring_app] = app_url
+  def referring_app(app)
+    session[:referring_app_id] = app.id unless app.nil?
   end
 end

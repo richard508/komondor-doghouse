@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
 
   def new
-    referring_app(params[:referrer]) if params[:referrer].present?
+    if params[:referrer].present?
+      app = App.find_by(url: params[:referrer])
+      referring_app(app)
+    end
   end
 
   def create

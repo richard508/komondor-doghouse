@@ -1,7 +1,8 @@
 class SingleSignOn
-  def initialize user, message = nil
+  def initialize user, app, message = nil
     @user = user
     @message = message
+    @app = app
   end
 
   def signed_message
@@ -18,6 +19,6 @@ class SingleSignOn
   end
 
   def signature
-    OpenSSL::HMAC.hexdigest("sha1", ENV['IHUB_SECRET_KEY'], message)
+    OpenSSL::HMAC.hexdigest("sha1", @app.secret_key, message)
   end
 end

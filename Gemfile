@@ -50,3 +50,4 @@ end
 
 gem "simple_form", "~> 3.0.0"
 gem "dynamic_form", "~> 1.1.4"
+gem "httparty", "~> 0.12.0"
