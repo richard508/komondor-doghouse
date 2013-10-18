@@ -1,10 +1,15 @@
 module SessionsHelper
 
-  def sign_in(user)
+  def sign_in(user, referrer_id = nil)
     remember_token = User.new_remember_token
     cookies.permanent[:remember_token] = remember_token
     user.update_attribute(:remember_token, User.encrypt(remember_token))
     self.current_user = user
+    unless referrer_id.blank? || referrer_id.nil?
+      app = App.find(referrer_id)
+      return app_url(current_user, app)
+    end
+    root_path
   end
 
   def signed_in?
@@ -31,20 +36,28 @@ module SessionsHelper
     end
   end
 
+  def sign_out_check
+    if params[:signout].present?
+      sign_out
+      if params[:referrer]
+        redirect_to signin_path(referrer: params[:referrer])
+      else
+        redirect_to signin_path
+      end
+    end
+  end
+
   def sign_out
+    current_user.apps.each do |app|
+      HTTParty.get("http://#{app.url}/sessions/signout?sig=#{SingleSignOn.new(current_user, app).signed_message}")
+    end
     self.current_user = nil
     cookies.delete(:remember_token)
   end
 
   def redirect_back_or(default)
-    if session[:referring_app_id].present?
-      app = App.find(session[:referring_app_id])
-      redirect_to app_url(current_user, app)
-      session.delete(:referring_app_id)
-    else
-      redirect_to(session[:return_to] || default)
-      session.delete(:return_to)
-    end
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
   end
 
   def app_url(user, app)
@@ -53,9 +66,5 @@ module SessionsHelper
 
   def store_location
     session[:return_to] = request.url if request.get?
-  end
-
-  def referring_app(app)
-    session[:referring_app_id] = app.id unless app.nil?
   end
 end

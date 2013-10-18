@@ -1,5 +1,6 @@
 <% provide(:title, "Sign in") %>
 <h1>Sign in</h1>
+<h2>to <%= @app.name %></h2>
 
 <div class="row">
   <div class="span6 offset3">
@@ -10,6 +11,8 @@
 
       <%= f.label :password %>
       <%= f.password_field :password %>
+
+      <%= hidden_field_tag :referrer, @app.id %>
 
       <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
     <% end %>
