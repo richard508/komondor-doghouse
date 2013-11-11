@@ -8,20 +8,27 @@
   <%= render 'layouts/shim' %>
 </head>
 <body>
-  <ul>
-    <% if signed_in? %>
-      <% if current_user.admin? %>
-        <li><%= link_to "Users", admin_users_path %></li>
-        <li><%= link_to "Accounts", admin_accounts_path %></li>
-        <li><%= link_to "Apps", admin_apps_path %></li>
-      <% end %>
-      <li><%= link_to "Signout", signout_path, method: :delete %></li>
+  <section id="main">
+    <header>
+      <nav>
+        <ul>
+          <% if signed_in? %>
+            <li><%= link_to "Home", root_path %></li>
+            <% if current_user.admin? %>
+              <li><%= link_to "Users", admin_users_path %></li>
+              <li><%= link_to "Accounts", admin_accounts_path %></li>
+              <li><%= link_to "Apps", admin_apps_path %></li>
+            <% end %>
+            <li><%= link_to "Signout", signout_path, method: :delete %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+    <% flash.each do |key, value| %>
+      <div class="alert <%= key %>"><%= value %></div>
     <% end %>
-  </ul>
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-<%= yield %>
-<%= debug(params) if Rails.env.development? %>
+    <%= yield %>
+  </section>
+  <%= debug(params) if Rails.env.development? %>
 </body>
 </html>
