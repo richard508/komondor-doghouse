@@ -31,7 +31,6 @@ module SessionsHelper
 
   def signed_in_user
     unless signed_in?
-      store_location
       redirect_to signin_url, notice: "Please sign in."
     end
   end
@@ -55,16 +54,7 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
-  def redirect_back_or(default)
-    redirect_to(session[:return_to] || default)
-    session.delete(:return_to)
-  end
-
   def app_url(user, app)
     "http://#{app.url}/sessions/new?sig=#{SingleSignOn.new(user, app).signed_message}"
-  end
-
-  def store_location
-    session[:return_to] = request.url if request.get?
   end
 end
