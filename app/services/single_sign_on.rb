@@ -14,7 +14,7 @@ class SingleSignOn
   def message
     @msg ||= begin
       data = @message || [@user.id, Time.now.utc]
-      Base64.encode64(Marshal.dump(data)).gsub("\n", "")
+      Base64.urlsafe_encode64(Marshal.dump(data))
     end
   end
 
