@@ -4,7 +4,8 @@ An auth-providing app used in conjuction with the [Komondor gem](insert link) to
 
 ## Installation
 
-1. `git clone repo`
+1. `git clone https://github.com/Infosurv/komondor-doghouse.git`
+2. `cd komondor-doghouse`
 2. `bundle install`
 3. `rake db:migrate`
 4. create first admin user
