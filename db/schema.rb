@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 20131015235507) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "remember_token"
     t.boolean  "admin"
     t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["account_id"], name: "index_users_on_account_id"
