@@ -1,5 +1,6 @@
 class DistributeUserJob
   class NewUserNotCreated < StandardError; end
+
   attr_reader :user_id, :app_id
   def initialize user_id, app_id
     @user_id = user_id
@@ -9,9 +10,10 @@ class DistributeUserJob
   def perform
     user = User.find(user_id)
     app = App.find(app_id)
-    response = HTTParty.get "http://#{app.url}/users/new?sig=#{SingleSignOn.new(user, app, message(user)).signed_message}"
-    # TODO deal with error case
-    raise NewUserNotCreated if response.code != 201
+    url = "http://#{app.url}/users/new?sig=#{Komondor::Sender.new(user, app, message(user)).signed_message}"
+    response = HTTParty.get url
+    #TODO deal with error case
+    raise NewUserNotCreated, "Failed while talking to #{app.url}." if response.code != 201
   end
 
   private

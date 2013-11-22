@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Ihub::Application.load_tasks
+DogHouse::Application.load_tasks

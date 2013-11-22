@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       return
     end
     if params[:referrer].blank?
-      @app = OpenStruct.new(id: nil, name: 'iHub')
+      @app = OpenStruct.new(id: nil, name: 'the Dog House')
     else
       @app = App.find_by(url: params[:referrer])
     end

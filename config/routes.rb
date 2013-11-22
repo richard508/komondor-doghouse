@@ -1,4 +1,4 @@
-Ihub::Application.routes.draw do
+DogHouse::Application.routes.draw do
   root 'dashboard#show'
   resource :dashboard, only: [:show]
   resources :sessions, only: [:new, :create, :destroy]

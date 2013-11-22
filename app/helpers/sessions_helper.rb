@@ -48,13 +48,13 @@ module SessionsHelper
 
   def sign_out
     current_user.apps.each do |app|
-      HTTParty.get("http://#{app.url}/sessions/signout?sig=#{SingleSignOn.new(current_user, app).signed_message}")
+      HTTParty.get("http://#{app.url}/sessions/signout?sig=#{Komondor::Sender.new(current_user, app).signed_message}")
     end
     self.current_user = nil
     cookies.delete(:remember_token)
   end
 
   def app_url(user, app)
-    "http://#{app.url}/sessions/new?sig=#{SingleSignOn.new(user, app).signed_message}"
+    "http://#{app.url}/sessions/new?sig=#{Komondor::Sender.new(user, app).signed_message}"
   end
 end
