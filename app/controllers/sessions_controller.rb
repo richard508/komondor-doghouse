@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
       redirect_to sign_in(user, params[:referrer])
     else
       flash.now[:error] = 'Invalid email/password combination'
+      @app = OpenStruct.new(id: nil, name: 'the Dog House')
       render 'new'
     end
   end

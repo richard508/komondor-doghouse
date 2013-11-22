@@ -7,7 +7,11 @@ module SessionsHelper
     self.current_user = user
     unless referrer_id.blank? || referrer_id.nil?
       app = App.find(referrer_id)
-      return app_url(current_user, app)
+      if app.accounts.include?(current_user.account)
+        return app_url(current_user, app)
+      else
+        flash[:notice] = "Your account does not have access to this application."
+      end
     end
     root_path
   end
