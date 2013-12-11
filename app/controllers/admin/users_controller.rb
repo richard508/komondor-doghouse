@@ -12,6 +12,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       distribute_user(@user)
+      @user.send_new_user_welcome
       redirect_to admin_users_path, notice: "New User has been added!"
     else
       render :new
@@ -33,6 +34,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
+    # TODO: add archive feature
     User.find(params[:id]).destroy
     redirect_to admin_users_path, notice: "User has been deleted!"
   end
