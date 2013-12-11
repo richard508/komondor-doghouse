@@ -12,6 +12,7 @@
         <%= hidden_field_tag :referrer, @app.id %>
         <%= f.submit "Sign in" %>
       <% end %>
+      <p><%= link_to "forgotten password?", new_password_reset_path %></p>
     </div>
   </div>
 </div>

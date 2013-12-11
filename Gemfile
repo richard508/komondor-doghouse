@@ -46,6 +46,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 group :development, :test do
   gem 'dotenv-rails'
+  gem "letter_opener", "~> 1.1.2"
 end
 
 gem "simple_form", "~> 3.0.0"
