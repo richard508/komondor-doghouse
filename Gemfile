@@ -3,8 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg', group: :production
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -47,6 +46,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 group :development, :test do
   gem 'dotenv-rails'
   gem "letter_opener", "~> 1.1.2"
+  gem 'sqlite3'
 end
 
 gem "simple_form", "~> 3.0.0"
