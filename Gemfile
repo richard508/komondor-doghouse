@@ -57,4 +57,4 @@ gem "active_model_serializers", "~> 0.8.1"
 gem 'bourbon', "~> 3.1.8"
 gem 'neat', "~> 1.4.0"
 
-gem 'komondor', path: "../komondor"
+gem 'komondor', github: "richard508/komondor"

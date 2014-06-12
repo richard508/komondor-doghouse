@@ -1,5 +1,6 @@
-PATH
-  remote: ../komondor
+GIT
+  remote: git://github.com/richard508/komondor.git
+  revision: cc14edb689ac7a2426ba6babf03ce97581ed6edb
   specs:
     komondor (0.0.2)
 
