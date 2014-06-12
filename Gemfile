@@ -58,3 +58,6 @@ gem 'bourbon', "~> 3.1.8"
 gem 'neat', "~> 1.4.0"
 
 gem 'komondor', github: "richard508/komondor"
+
+
+gem 'rails_12factor', group: :production
