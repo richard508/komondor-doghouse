@@ -1,6 +1,6 @@
 # Komondor | Dog House
 
-An auth-providing app used in conjuction with the [Komondor gem](insert link) to allow for single sign on.
+An auth-providing app used in conjuction with the [Komondor gem](https://github.com/richard508/komondor) to allow for single sign on.
 
 ## Installation
 
