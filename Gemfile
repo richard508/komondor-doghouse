@@ -5,8 +5,6 @@ gem 'rails', '4.0.0'
 
 gem 'pg', group: :production
 
-gem 'dotenv-rails'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
